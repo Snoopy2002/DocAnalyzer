@@ -78,13 +78,13 @@ if __name__ == "__main__":
     st.image('parrot.png')
     st.subheader('LLM ? Answering Application')
     with st.sidebar:
-        api_key=st.text_input('Enter OpenAI Key: ', type='password')
+        api_key=st.text_input('Enter your OpenAI Key: ', type='password')
         if api_key:
             os.environ['OPENAI_API_KEY']=api_key
         uploaded_file=st.file_uploader('Upload file: ', type=['pdf','docx','txt'])
         chunk_size=st.number_input('Chunk size:',min_value=100, max_value=2048, value=512, on_change=clear_history)
-        k=st.number_input('k', min_value=1, max_value=20, value=3, on_change=clear_history)
-        add_data = st.button('Add Data ', on_click=clear_history)
+        k=st.number_input('k (similar chunks, greater = more detail)', min_value=1, max_value=20, value=3, on_change=clear_history)
+        add_data = st.button('Analyze file', on_click=clear_history)
         
         if uploaded_file and add_data:
             with st.spinner('Reading, chunking and embedding file: '):
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     if question:
         if 'vs' in st.session_state:
             vector_store = st.session_state.vs
-            st.write(f'k:{k}')
+            #st.write(f'k:{k}')
             answer = ask_and_get_answer(vector_store, question, k)
             st.text_area('LLM Answer: ', value=answer)
             st.divider()
@@ -117,4 +117,5 @@ if __name__ == "__main__":
             h=st.session_state.history
 
             st.text_area(label='Chat History', value=h, key='history', height=600)
+
 
