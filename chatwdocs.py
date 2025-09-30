@@ -82,7 +82,7 @@ if __name__ == "__main__":
         if api_key:
             os.environ['OPENAI_API_KEY']=api_key
         uploaded_file=st.file_uploader('Upload file: ', type=['pdf','docx','txt'])
-        chunk_size=st.number_input('Chunk size:',min_value=100, max_value=2048, value=512, on_change=clear_history)
+        chunk_size=st.number_input('Chunk size (smaller=more details):',min_value=100, max_value=2048, value=512, on_change=clear_history)
         k=st.number_input('k (similar chunks, greater = more detail)', min_value=1, max_value=20, value=3, on_change=clear_history)
         add_data = st.button('Analyze file', on_click=clear_history)
         
@@ -117,5 +117,6 @@ if __name__ == "__main__":
             h=st.session_state.history
 
             st.text_area(label='Chat History', value=h, key='history', height=600)
+
 
 
