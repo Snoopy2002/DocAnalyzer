@@ -5,7 +5,6 @@ Created on Mon Sep 29 14:44:59 2025
 @author: Snoopy
 """
 import streamlit as st
-import langchain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 import os
@@ -118,3 +117,4 @@ if __name__ == "__main__":
             h=st.session_state.history
 
             st.text_area(label='Chat History', value=h, key='history', height=600)
+
