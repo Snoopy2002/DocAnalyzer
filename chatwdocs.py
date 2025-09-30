@@ -53,7 +53,7 @@ def ask_and_get_answer(vector_store, q, k): #k most similar chunks of data to an
 
     chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
     
-    answer = chain.run(q)
+    answer = chain.invoke(q)
     return answer
 
 def calc_embedding_cost(texts):
@@ -117,6 +117,7 @@ if __name__ == "__main__":
             h=st.session_state.history
 
             st.text_area(label='Chat History', value=h, key='history', height=600)
+
 
 
 
